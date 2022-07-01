@@ -2,7 +2,6 @@
 ##
 
 # Set ARG
-UUID=d84dfcfc-364e-4fdf-81b9-5a8bc8282f7f
 ARCH="64"
 DOWNLOAD_PATH="/tmp/v2ray"
 
@@ -53,35 +52,32 @@ cat <<EOF >/etc/v2ray/config.json
     "log": {
         "loglevel": "warning"
     },
-	"inbounds": [
-		{
-			"listen": "0.0.0.0",
-			"port": 8080,
-			"protocol": "vless",
-			"settings": {
-				"clients": [
-					{
-						"id": "$UUID"
-					}
-				],
-			"decryption": "none"
-		},
-		"streamSettings": {
-			"network": "ws",
-			"wsSettings": {
-					"path": "/$UUID-vless"
-				}
-			}
-		}
-	],
-	"outbounds": [
-		{
-			"protocol": "freedom"
-		}
-	]
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 8080,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "d84dfcfc-364e-4fdf-81b9-5a8bc8282f7f",
+                        "alterId": 0
+                    }
+                ],
+                "disableInsecureEncryption": true
+            },
+            "streamSettings": {
+                "network": "ws"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
 }
 EOF
-
 
 # Clean
 cd ~ || return
